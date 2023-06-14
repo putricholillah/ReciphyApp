@@ -1,20 +1,25 @@
 package com.example.reciphyapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.annotation.StringRes
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.reciphyapp.api.ApiConfig
+import com.example.reciphyapp.database.ListRecomResponseItem
 import com.example.reciphyapp.databinding.ActivityMainBinding
+import com.example.reciphyapp.homepage.FragmentAdapter
+import com.example.reciphyapp.recommendation.RecommendationActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var recipeList: ArrayList<Recipes>
-    private lateinit var mainAdapter: MainAdapter
     private lateinit var binding: ActivityMainBinding
 
     companion object {
@@ -22,8 +27,10 @@ class MainActivity : AppCompatActivity() {
         private val TAB_TITLES = intArrayOf(
             R.string.daging,
             R.string.ayam,
+            R.string.ikan,
             R.string.telur
         )
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,28 +46,9 @@ class MainActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-        findRecommend()
-    }
-
-    private fun findRecommend() {
-        recyclerView = findViewById(R.id.rv_recent)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager =LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        recipeList = ArrayList()
-
-        addToList()
-
-        mainAdapter = MainAdapter(recipeList)
-        recyclerView.adapter = mainAdapter
-
-    }
-
-    private fun addToList(){
-        recipeList.add(Recipes(R.drawable.nasi_goreng, "Nasi Goreng", "nasi"))
-        recipeList.add(Recipes(R.drawable.nasi_goreng, "Nasi Goreng", "telur"))
-        recipeList.add(Recipes(R.drawable.nasi_goreng, "Nasi Goreng", "daun bawang"))
-        recipeList.add(Recipes(R.drawable.nasi_goreng, "Nasi Goreng", "bawang merah"))
-        recipeList.add(Recipes(R.drawable.nasi_goreng, "Nasi Goreng", "bawang putih"))
+        binding.toolbarHome.clSearch.setOnClickListener {
+            startActivity(Intent(this@MainActivity, RecommendationActivity::class.java))
+        }
 
     }
 }
