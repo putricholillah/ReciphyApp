@@ -1,7 +1,13 @@
 package com.example.reciphyapp.detail
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.BulletSpan
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentManager
@@ -10,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.reciphyapp.R
+import com.example.reciphyapp.database.DetailResponse
 import com.example.reciphyapp.databinding.ActivityDetailBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -49,12 +56,12 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel.findDetail(ID = recipeId)
         viewModel.recipe.observe(this){ recipe ->
-            detailSectionsPagerAdapter.ingredients = recipe?.ingredients.toString()
-            detailSectionsPagerAdapter.steps = recipe?.steps.toString()
             binding.tvTitleDetail.text = recipe?.title
             Glide.with(this@DetailActivity)
                 .load(recipe?.url)
                 .into(binding.ivImgDetail)
+            detailSectionsPagerAdapter.ingredients = recipe?.ingredients.toString()
+            detailSectionsPagerAdapter.steps = recipe?.steps.toString()
             }
 
         viewModel.isLoading.observe(this){
