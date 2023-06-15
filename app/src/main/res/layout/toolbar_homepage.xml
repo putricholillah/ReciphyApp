@@ -19,11 +19,11 @@
 
         <TextView
             android:id="@+id/tv_greeting"
-            android:layout_width="229dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/poppins_semibold"
-            android:text="What do you want to cook today?"
+            android:text="@string/homepage_greeting"
             android:textColor="@color/dark_blue"
             android:textSize="24sp" />
 
@@ -35,8 +35,8 @@
             android:layout_marginRight="16dp"
             android:background="#00FFFFFF"
             android:contentDescription="Profile"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
+            android:scaleX="1.8"
+            android:scaleY="1.8"
             app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
         <androidx.appcompat.widget.Toolbar
@@ -72,7 +72,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Search "
+                    android:text="@string/search"
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"

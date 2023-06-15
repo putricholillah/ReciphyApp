@@ -20,6 +20,8 @@ import com.example.reciphyapp.database.DetailResponse
 import com.example.reciphyapp.databinding.ActivityDetailBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener
 
 class DetailActivity : AppCompatActivity() {
 
@@ -40,10 +42,10 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val detailSectionsPagerAdapter = DetailSectionPageAdapter(this)
         val viewPager: ViewPager2 = findViewById(R.id.viewpager_detail)
-        viewPager.adapter = detailSectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
+        val detailSectionsPagerAdapter = DetailSectionPageAdapter(this)
+        viewPager.adapter = detailSectionsPagerAdapter
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
